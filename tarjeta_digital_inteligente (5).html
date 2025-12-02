@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tarjeta Digital Inteligente — [ALDAHIR INGA ARROYO]</title>
+  <meta name="description" content="Tarjeta profesional digital: LinkedIn, CV, proyectos, blog y contacto." />
+  <!-- Tailwind via CDN for rapid styling (optional). Replace with your own styles if you host offline. -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- QRCode library (generates QR from the current page URL) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <style>
+    /* Minimal page-print friendly tweaks */
+    .avatar{width:110px;height:110px;object-fit:cover;border-radius:9999px}
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+  <main class="max-w-3xl mx-auto p-6">
+    <section class="bg-white shadow-lg rounded-2xl p-6 flex gap-6 items-center">
+      <img id="photo" src="https://via.placeholder.com/220x220?text=Tu+Foto" alt="Foto" class="avatar"/>
+      <div class="flex-1">
+        <h1 id="name" class="text-2xl font-bold">[Aldahir Inga Arroyo]</h1>
+        <p id="role" class="text-sm text-gray-600">[Tu cargo / Título profesional]</p>
+        <p id="summary" class="mt-3 text-sm text-gray-700">Resumen breve (1-2 líneas) que describa tu propuesta de valor como profesional. Ej: Ingeniero de mantenimiento con 8 años en maquinaria pesada y gestión de proyectos.</p>
+
+        <div class="mt-4 flex flex-wrap gap-3">
+          <a id="linkedin" href="#" target="_blank" class="px-3 py-2 bg-blue-600 text-white rounded-md text-sm">LinkedIn</a>
+          <a id="cvlink" href="#" target="_blank" class="px-3 py-2 bg-gray-800 text-white rounded-md text-sm">Descargar CV</a>
+          <a id="emailBtn" href="#" class="px-3 py-2 bg-green-600 text-white rounded-md text-sm">Email</a>
+          <a id="phoneBtn" href="#" class="px-3 py-2 bg-yellow-500 text-black rounded-md text-sm">Llamar / WhatsApp</a>
+        </div>
+
+      </div>
+      <div class="w-36 text-center">
+        <div id="qrcode"></div>
+        <p class="text-xs text-gray-500 mt-2">Escanea o comparte este QR</p>
+        <button id="downloadQR" class="mt-2 px-3 py-1 text-xs bg-indigo-600 text-white rounded">Descargar QR</button>
+      </div>
+    </section>
+
+    <!-- Secciones de contenido -->
+    <section class="mt-6 grid grid-cols-1 gap-4">
+      <div class="bg-white p-4 rounded-lg shadow">
+        <h2 class="font-semibold">Contacto</h2>
+        <ul class="mt-2 text-sm text-gray-700 space-y-1">
+          <li><strong>Email:</strong> <span id="email">tu@correo.com</span></li>
+          <li><strong>Teléfono:</strong> <span id="phone">+51 9xx xxx xxx</span></li>
+          <li><strong>Ubicación:</strong> <span id="location">Lima, Perú</span></li>
+        </ul>
+      </div>
+
+      <div class="bg-white p-4 rounded-lg shadow">
+        <h2 class="font-semibold">Proyectos destacados</h2>
+        <div id="projects" class="mt-3 grid grid-cols-1 md:grid-cols-2 gap-3">
+          <!-- Repite tarjetas de proyecto aquí. Cada tarjeta tiene título, breve descripción y enlace -->
+          <div class="p-3 border rounded">
+            <h3 class="font-medium">Proyecto 1</h3>
+            <p class="text-xs text-gray-600">Breve descripción (qué, rol, resultado).</p>
+            <a href="#" target="_blank" class="text-xs text-indigo-600">Ver más</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white p-4 rounded-lg shadow">
+        <h2 class="font-semibold">Publicaciones / Blog</h2>
+        <ul id="blogs" class="mt-2 text-sm text-gray-700 space-y-1">
+          <li><a href="#" target="_blank" class="text-indigo-600">Artículo / Entrada 1</a></li>
+        </ul>
+      </div>
+
+      <div class="bg-white p-4 rounded-lg shadow">
+        <h2 class="font-semibold">Currículum (previsualización)</h2>
+        <p class="text-sm text-gray-600"> <code></code> </p>
+        <iframe id="cvPreview" src="" class="w-full mt-3 h-72 border rounded"></iframe>
+      </div>
+
+      <div class="bg-white p-4 rounded-lg shadow">
+        <h2 class="font-semibold">Ficha vCard (descarga)</h2>
+        <p class="text-sm text-gray-600">Descarga la tarjeta de contacto para agregar a tu agenda.</p>
+        <button id="downloadVcard" class="mt-2 px-3 py-2 bg-gray-800 text-white rounded">Descargar vCard</button>
+      </div>
+
+      <div class="bg-white p-4 rounded-lg shadow">
+        <h2 class="font-semibold">Redes y espacios</h2>
+        <div class="mt-2 flex flex-wrap gap-2">
+          <a id="web1" href="#" target="_blank" class="px-3 py-2 border rounded text-sm">Portfolio</a>
+          <a id="web2" href="#" target="_blank" class="px-3 py-2 border rounded text-sm">Blog</a>
+        </div>
+      </div>
+
+      <div class="bg-white p-4 rounded-lg shadow">
+        <h2 class="font-semibold">Acciones rápidas</h2>
+        <div class="mt-3 flex gap-2 flex-wrap">
+          <a id="emailAction" href="#" class="px-3 py-2 bg-green-600 text-white rounded text-sm">Enviar correo</a>
+          <a id="whatsappAction" href="#" class="px-3 py-2 bg-green-400 text-white rounded text-sm">Abrir WhatsApp</a>
+          <a id="linkedinAction" href="#" class="px-3 py-2 bg-blue-600 text-white rounded text-sm">Ver LinkedIn</a>
+        </div>
+      </div>
+
+    </section>
+
+    <footer class="mt-6 text-center text-xs text-gray-500">Tarjeta generada con plantilla — Personalízala y hospédala en tu dominio o en páginas como GitHub Pages, Netlify o Vercel.</footer>
+  </main>
+
+  <script>
+    /* --------------------------------------------------
+       REMPLAZA los valores entre corchetes con tus datos.
+       - Luego sube el archivo a un hosting (GitHub Pages, Netlify, Vercel)
+       - La función QR usa la URL actual (location.href)
+       - Para que "Descargar CV" y el <iframe> funcionen, sube cv.pdf al mismo directorio o cambia cvUrl.
+       --------------------------------------------------*/
+
+    const data = {
+      name: 'Aldahir Inga Arroyo',
+      role: 'Estudiante de sexto ciclo de Gestión y Mantenimiento de Maquinaria Pesada',
+      summary: 'Estudiante de Tecsup con conocimientos en sistemas hidráulicos, motores diésel y mantenimiento de maquinaria pesada.',
+      photo: 'FT- formal.png',
+      linkedin: 'https://www.linkedin.com/in/ingaarroyoaldahir',
+      cvUrl: 'CV Inga Aldahir .pdf', // reemplaza con URL pública si aplica
+      email: 'aldahiringaa@gmail.com',
+      phone: '+51912949775',
+      location: 'Santa Anita, Lima, Perú',
+      projects: [
+        {title:'Sistema de monitoreo de presión neumática', desc:'Sistema en tiempo real para vehículos de carga pesada y buses.', url:'#'},
+        {title:'Banco de pruebas de cilindros hidráulicos', desc:'Diseño para taller Jiménez para mejorar servicio de mantenimiento.', url:'#'}
+      ],
+      blogs: [ {title:'Cómo implementar mantenimiento predictivo', url:'#'} ],
+      webSpaces: [ {title:'Portfolio', url:'#'} ]
+    }
+
+    // populate UI
+    document.getElementById('name').textContent = data.name;
+    document.getElementById('role').textContent = data.role;
+    document.getElementById('summary').textContent = data.summary;
+    document.getElementById('photo').src = data.photo;
+    document.getElementById('linkedin').href = data.linkedin;
+    document.getElementById('cvlink').href = data.cvUrl;
+    document.getElementById('email').textContent = data.email;
+    document.getElementById('phone').textContent = data.phone;
+    document.getElementById('location').textContent = data.location;
+    document.getElementById('emailBtn').href = `mailto:${data.email}`;
+    document.getElementById('phoneBtn').href = `tel:${data.phone}`;
+    document.getElementById('emailAction').href = `mailto:${data.email}`;
+    document.getElementById('whatsappAction').href = `https://wa.me/${data.phone.replace(/\D/g,'')}`;
+    document.getElementById('linkedinAction').href = data.linkedin;
+    document.getElementById('cvPreview').src = data.cvUrl;
+
+    // projects
+    const projectsWrap = document.getElementById('projects');
+    projectsWrap.innerHTML = '';
+    data.projects.forEach(p=>{
+      const d = document.createElement('div'); d.className='p-3 border rounded';
+      d.innerHTML = `<h3 class="font-medium">${p.title}</h3><p class="text-xs text-gray-600">${p.desc}</p><a href="${p.url}" target="_blank" class="text-xs text-indigo-600">Ver más</a>`;
+      projectsWrap.appendChild(d);
+    });
+
+    // blogs
+    const blogsWrap = document.getElementById('blogs');
+    blogsWrap.innerHTML='';
+    data.blogs.forEach(b=>{ const li=document.createElement('li'); li.innerHTML = `<a href="${b.url}" target="_blank" class="text-indigo-600">${b.title}</a>`; blogsWrap.appendChild(li) });
+
+    // web spaces
+    const web1 = document.getElementById('web1'); web1.href = data.webSpaces[0]?.url || '#'; web1.textContent = data.webSpaces[0]?.title || 'Portfolio';
+
+    // QR
+    const qrcodeEl = document.getElementById('qrcode');
+    const qrcode = new QRCode(qrcodeEl, { text: location.href, width: 120, height: 120 });
+
+    // Download QR as image
+    document.getElementById('downloadQR').addEventListener('click', ()=>{
+      const img = qrcodeEl.querySelector('img') || qrcodeEl.querySelector('canvas');
+      if(!img){ alert('QR no generado'); return }
+      let dataUrl = img.tagName === 'IMG' ? img.src : img.toDataURL('image/png');
+      const a = document.createElement('a'); a.href = dataUrl; a.download = `${data.name || 'qr'}-card.png`; a.click();
+    });
+
+    // Generate and download vCard
+    document.getElementById('downloadVcard').addEventListener('click', ()=>{
+      const vcard = `BEGIN:VCARD\nVERSION:3.0\nFN:${data.name}\nORG:${data.role}\nEMAIL:${data.email}\nTEL:${data.phone}\nADR:;;${data.location};;;;\nURL:${data.linkedin}\nEND:VCARD`;
+      const blob = new Blob([vcard], {type:'text/vcard'});
+      const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `${data.name.replace(/\s+/g,'_')}.vcf`; a.click();
+    });
+
+  </script>
+
+</body>
+</html>
